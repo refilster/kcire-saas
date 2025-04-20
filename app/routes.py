@@ -104,3 +104,10 @@ def facsu_inscricao_finalizar():
 @routes.route('/')
 def home():
     return redirect(url_for('routes.login'))
+from flask import Blueprint, render_template
+
+routes = Blueprint('routes', __name__)
+
+@routes.route('/')
+def home():
+    return "Funcionando!"
