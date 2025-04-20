@@ -5,6 +5,11 @@ from app import db
 
 routes = Blueprint('routes', __name__)
 
+# ROTA INICIAL
+@routes.route('/')
+def home():
+    return redirect(url_for('routes.login'))
+
 # LOGIN
 @routes.route('/login', methods=['GET', 'POST'])
 def login():
@@ -39,7 +44,7 @@ def cadastro():
         return redirect(url_for('routes.login'))
     return render_template('register.html')
 
-# PAINEL
+# PAINEL DO CONSULTOR
 @routes.route('/painel')
 def painel():
     if 'usuario_id' not in session:
@@ -51,25 +56,23 @@ def painel():
 def indicar_aluno():
     return render_template('indicar.html')
 
-# PÁGINA DE GRADUAÇÃO GERAL
+# GRADUAÇÃO - GERAL
 @routes.route('/facsu-graduacao')
 def facsu_graduacao_padrao():
     return render_template('facsu_graduacao.html')
 
-# PÁGINA DE GRADUAÇÃO DE SÃO LUÍS
+# GRADUAÇÃO - SÃO LUÍS
 @routes.route('/facsu-graduacao/sao-luis')
 def facsu_graduacao_sao_luis():
     return render_template('facsu_graduacao_sao_luis.html')
 
-# OFERTAS (escolhe curso e cidade e segue para formulário de inscrição)
+# ESCOLHA DE OFERTAS (curso + cidade)
 @routes.route('/ofertas-facsu')
 def ofertas_facsu():
     curso = request.args.get('curso')
     cidade = request.args.get('cidade')
-
     session['curso_selecionado'] = curso
     session['cidade_selecionada'] = cidade
-
     return redirect(url_for('routes.facsu_inscricao_dados'))
 
 # ETAPA 1 – DADOS PESSOAIS
@@ -96,11 +99,6 @@ def facsu_inscricao_confirmacao():
     return render_template('facsu_inscricao_confirmacao.html')
 
 # ETAPA FINAL – INSCRIÇÃO CONCLUÍDA
-@routes.route('/facsu-inscricao-finalizar', methods=['GET'])
+@routes.route('/facsu-inscricao-finalizar')
 def facsu_inscricao_finalizar():
     return render_template('inscricao_finalizada.html')
-
-# ROTA INICIAL
-@routes.route('/')
-def home():
-    return redirect(url_for('routes.login'))
