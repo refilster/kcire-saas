@@ -118,7 +118,7 @@
       Painel do Consultor - <span class="kcire-logo">Kcire</span>
     </div>
 
-    <p class="welcome-text">Olá, João!</p>
+    <p class="welcome-text">Olá, {{ nome_consultor }}!</p>
 
     <div class="row row-cols-2 row-cols-sm-2 g-3 mt-3">
         <div class="col">
@@ -139,10 +139,11 @@
           <div class="card-option">Precisa de Ajuda?</div>
         </div>
         <div class="col">
-          <div class="card-option">Sair</div>
+          <div class="card-option" onclick="location.href='/logout'" style="cursor: pointer;">
+            Sair
+          </div>
         </div>
       </div>
-      
 
     <p class="section-title">
       É novo por aqui? Saiba tudo sobre se tornar um consultor de sucesso

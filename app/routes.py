@@ -20,6 +20,12 @@ def login():
             return "E-mail ou senha inválidos!", 401
     return render_template('login.html')
 
+# LOGOUT
+@routes.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('routes.login'))
+
 # CADASTRO
 @routes.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -44,7 +50,9 @@ def cadastro():
 def painel():
     if 'usuario_id' not in session:
         return redirect(url_for('routes.login'))
-    return render_template('painel.html')
+
+    usuario = Usuario.query.get(session['usuario_id'])
+    return render_template('painel.html', nome_consultor=usuario.nome)
 
 # INDICAR ALUNO
 @routes.route('/indicar')
