@@ -56,23 +56,28 @@ def painel():
 def indicar_aluno():
     return render_template('indicar.html')
 
-# GRADUAÇÃO - GERAL
+# PÁGINA DE GRADUAÇÃO GERAL
 @routes.route('/facsu-graduacao')
 def facsu_graduacao_padrao():
     return render_template('facsu_graduacao.html')
 
-# GRADUAÇÃO - SÃO LUÍS
+# PÁGINA DE GRADUAÇÃO DE SÃO LUÍS
 @routes.route('/facsu-graduacao/sao-luis')
 def facsu_graduacao_sao_luis():
     return render_template('facsu_graduacao_sao_luis.html')
 
-# ESCOLHA DE OFERTAS (curso + cidade)
+# ESCOLHA DE CURSO E CIDADE (oferta)
 @routes.route('/ofertas-facsu')
 def ofertas_facsu():
     curso = request.args.get('curso')
     cidade = request.args.get('cidade')
+
+    if not curso or not cidade:
+        return "Curso ou cidade não selecionados.", 400
+
     session['curso_selecionado'] = curso
     session['cidade_selecionada'] = cidade
+
     return redirect(url_for('routes.facsu_inscricao_dados'))
 
 # ETAPA 1 – DADOS PESSOAIS
@@ -95,10 +100,11 @@ def facsu_inscricao_endereco():
 @routes.route('/facsu-inscricao-confirmacao', methods=['GET', 'POST'])
 def facsu_inscricao_confirmacao():
     if request.method == 'POST':
+        # Aqui você pode salvar tudo no banco se quiser no futuro
         return redirect(url_for('routes.facsu_inscricao_finalizar'))
     return render_template('facsu_inscricao_confirmacao.html')
 
 # ETAPA FINAL – INSCRIÇÃO CONCLUÍDA
-@routes.route('/facsu-inscricao-finalizar')
+@routes.route('/facsu-inscricao-finalizar', methods=['GET'])
 def facsu_inscricao_finalizar():
     return render_template('inscricao_finalizada.html')
