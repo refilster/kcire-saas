@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graduação FACSU - Kcire</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #3343ca, #9b4edd);
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      background: #fff;
+      max-width: 700px;
+      margin: 50px auto;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .kcire-logo {
+      max-width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .form-select, .btn {
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <img src="/static/img/logo_kcire.png.png" alt="Logo Kcire" class="kcire-logo">
+    <h1 class="title">Graduação FACSU</h1>
+    <p>Escolha o curso e a localidade:</p>
+
+    <form method="GET" action="/ofertas-facsu">
+      <div class="form-group mb-3">
+        <select class="form-select" name="curso" required>
+          <option value="">Selecione um curso</option>
+          <option value="Pedagogia">Pedagogia</option>
+          <option value="Administração">Administração</option>
+          <option value="Serviço Social">Serviço Social</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <select class="form-select" name="cidade" required>
+          <option value="">Selecione a cidade</option>
+          <option value="São Luís">São Luís</option>
+          <option value="Imperatriz">Imperatriz</option>
+          <option value="Timon">Timon</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </form>
+  </div>
+
+</body>
+</html>

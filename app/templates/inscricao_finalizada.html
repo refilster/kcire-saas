@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscrição Finalizada</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      font-family: Arial, sans-serif;
+    }
+    .success-box {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin: 60px auto;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .success-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .success-top img {
+      height: 40px;
+    }
+    h2 {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .dados-box {
+      text-align: left;
+      background: #f7f7f7;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .btn-voltar {
+      background-color: #185a9d;
+      color: white;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+    .logo-faculdade {
+      height: 50px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="success-box">
+  <div class="success-top">
+    <img src="{{ url_for('static', filename='img/verificar.png') }}" alt="Confirmado">
+    <span class="fs-5 text-success fw-bold">Inscrição realizada com sucesso</span>
+  </div>
+
+  <h2>Inscrição Concluída</h2>
+  <p class="text-muted">Confira os dados enviados:</p>
+
+  <img class="logo-faculdade" src="{{ url_for('static', filename='img/facsu_logo.png') }}" alt="Faculdade FACSU">
+
+  <div class="dados-box mt-3">
+    <p><strong>Nome:</strong> João da Silva</p>
+    <p><strong>Curso:</strong> Administração</p>
+    <p><strong>Modalidade:</strong> Presencial</p>
+    <p><strong>Unidade:</strong> São Luís – Avenida dos Franceses, nº 10</p>
+    <p><strong>Mensalidade:</strong> R$ 128,00</p>
+    <p><strong>Primeira mensalidade:</strong> R$ 99,90</p>
+  </div>
+
+  <a href="/painel" class="btn btn-voltar w-100">Voltar ao Painel</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
