@@ -51,41 +51,36 @@ def painel():
 def indicar_aluno():
     return render_template('indicar.html')
 
-# GRADUAÇÃO - Página de seleção de curso e cidade
-@routes.route('/facsu-graduacao', methods=['GET', 'POST'])
+# AJUDA
+@routes.route('/ajuda')
+def ajuda():
+    return render_template('ajuda.html')
+
+# COMISSÕES
+@routes.route('/comissoes')
+def comissoes():
+    return render_template('comissoes.html')
+
+# VENDAS
+@routes.route('/vendas')
+def vendas():
+    return render_template('vendas.html')
+
+# PÁGINA DE GRADUAÇÃO GERAL
+@routes.route('/facsu-graduacao')
 def facsu_graduacao_padrao():
-    if request.method == 'POST':
-        curso = request.form.get('curso')
-        cidade = request.form.get('cidade')
-        session['curso_selecionado'] = curso
-        session['cidade_selecionada'] = cidade
-        return redirect(url_for('routes.exibir_ofertas'))
     return render_template('facsu_graduacao.html')
 
-# EXIBIR OFERTAS DO CURSO E CIDADE
-@routes.route('/facsu-graduacao/ofertas')
-def exibir_ofertas():
-    curso = session.get('curso_selecionado')
-    cidade = session.get('cidade_selecionada')
-    if not curso or not cidade:
-        return redirect(url_for('routes.facsu_graduacao_padrao'))
+# PÁGINA DE GRADUAÇÃO DE SÃO LUÍS (COM OFERTAS)
+@routes.route('/ofertas-facsu')
+def ofertas_facsu():
+    curso = request.args.get('curso')
+    cidade = request.args.get('cidade')
 
-    # Aqui você pode fazer um filtro real com base em banco de dados ou usar listas fixas
-    ofertas = {
-        "Pedagogia": ["Sábado 08h - 12h", "Noite 18h - 21h"],
-        "Administração": ["Online", "Presencial - Fim de Semana"],
-        "Serviço Social": ["Sábado 13h - 17h"]
-    }
-    lista_ofertas = ofertas.get(curso, [])
+    session['curso_selecionado'] = curso
+    session['cidade_selecionada'] = cidade
 
-    return render_template('facsu_graduacao_sao_luis.html', curso=curso, cidade=cidade, ofertas=lista_ofertas)
-
-# Ao clicar na oferta, segue para inscrição
-@routes.route('/oferta-escolhida', methods=['POST'])
-def oferta_escolhida():
-    oferta = request.form.get('oferta')
-    session['oferta_selecionada'] = oferta
-    return redirect(url_for('routes.facsu_inscricao_dados'))
+    return render_template('facsu_graduacao_sao_luis.html', curso=curso, cidade=cidade)
 
 # ETAPA 1 – DADOS PESSOAIS
 @routes.route('/facsu-inscricao-dados', methods=['GET', 'POST'])
@@ -111,7 +106,7 @@ def facsu_inscricao_confirmacao():
     return render_template('facsu_inscricao_confirmacao.html')
 
 # ETAPA FINAL – INSCRIÇÃO CONCLUÍDA
-@routes.route('/facsu-inscricao-finalizar')
+@routes.route('/facsu-inscricao-finalizar', methods=['GET'])
 def facsu_inscricao_finalizar():
     return render_template('inscricao_finalizada.html')
 
