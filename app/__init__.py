@@ -1,5 +1,16 @@
 from flask import Flask
-from app.routes import routes  # importa as rotas para registrar
+from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.register_blueprint(routes)
+db = SQLAlchemy()
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.init_app(app)
+
+    from .routes import routes
+    app.register_blueprint(routes)
+
+    return app
